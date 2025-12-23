@@ -21,7 +21,6 @@ export default function ContactPage() {
       <JsonLd data={[generateLocalBusinessSchema(), generateBreadcrumbSchema(breadcrumbs)]} />
       
       <main>
-        {/* Breadcrumbs */}
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <div className="container">
             <ol>
@@ -31,11 +30,11 @@ export default function ContactPage() {
           </div>
         </nav>
 
-        {/* Hero */}
         <section className="hero">
           <div className="container">
             <div className="hero-content">
-              <h1>Contact Us</h1>
+              <p className="section-label">Contact</p>
+              <h1>Let&apos;s Discuss Your Growth</h1>
               <p>
                 Ready to grow your aesthetic practice? Get in touch with our team 
                 to schedule a consultation.
@@ -44,65 +43,67 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact Form & Info */}
         <section className="section">
           <div className="container">
-            <div className="grid grid-2" style={{ alignItems: 'start' }}>
-              {/* Contact Form */}
+            <div className="grid grid-2" style={{ gap: 'var(--space-16)', alignItems: 'start' }}>
               <div>
-                <h2>Schedule a Consultation</h2>
-                <p className="text-muted" style={{ marginBottom: '2rem' }}>
+                <h2 style={{ marginBottom: 'var(--space-4)' }}>Schedule a Consultation</h2>
+                <p className="text-tertiary" style={{ marginBottom: 'var(--space-10)' }}>
                   Fill out the form below and a member of our team will be in touch 
                   within one business day.
                 </p>
                 
                 <form action="#" method="POST">
-                  <div className="form-group">
-                    <label htmlFor="name" className="form-label">Name *</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      name="name" 
-                      className="form-input" 
-                      required 
-                    />
+                  <div className="grid grid-2" style={{ gap: 'var(--space-6)' }}>
+                    <div className="form-group">
+                      <label htmlFor="name" className="form-label">Name *</label>
+                      <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        className="form-input" 
+                        required 
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="email" className="form-label">Email *</label>
+                      <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        className="form-input" 
+                        required 
+                      />
+                    </div>
                   </div>
                   
-                  <div className="form-group">
-                    <label htmlFor="email" className="form-label">Email *</label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      name="email" 
-                      className="form-input" 
-                      required 
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone" 
-                      className="form-input" 
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label htmlFor="practice" className="form-label">Practice Name</label>
-                    <input 
-                      type="text" 
-                      id="practice" 
-                      name="practice" 
-                      className="form-input" 
-                    />
+                  <div className="grid grid-2" style={{ gap: 'var(--space-6)' }}>
+                    <div className="form-group">
+                      <label htmlFor="phone" className="form-label">Phone</label>
+                      <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        className="form-input" 
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="practice" className="form-label">Practice Name</label>
+                      <input 
+                        type="text" 
+                        id="practice" 
+                        name="practice" 
+                        className="form-input" 
+                      />
+                    </div>
                   </div>
                   
                   <div className="form-group">
                     <label htmlFor="practice-type" className="form-label">Practice Type</label>
                     <select id="practice-type" name="practice-type" className="form-input">
-                      <option value="">Select...</option>
+                      <option value="">Select your practice type...</option>
                       <option value="plastic-surgery">Plastic Surgery</option>
                       <option value="medical-spa">Medical Spa</option>
                       <option value="coolsculpting">CoolSculpting</option>
@@ -112,75 +113,83 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="form-group">
-                    <label htmlFor="message" className="form-label">How Can We Help? *</label>
+                    <label htmlFor="message" className="form-label">How can we help? *</label>
                     <textarea 
                       id="message" 
                       name="message" 
                       className="form-textarea" 
+                      placeholder="Tell us about your practice and goals..."
                       required
                     ></textarea>
                   </div>
                   
-                  <button type="submit" className="button">
-                    Submit
+                  <button type="submit" className="cta-button button-large" style={{ width: '100%' }}>
+                    Submit Request
                   </button>
                 </form>
               </div>
 
-              {/* Contact Info */}
               <div>
-                <h2>Get In Touch</h2>
-                <p className="text-muted" style={{ marginBottom: '2rem' }}>
-                  Prefer to reach out directly? Here's how to contact us.
-                </p>
-                
-                <div style={{ marginBottom: '2rem' }}>
-                  <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Phone</h3>
-                  <a href={`tel:${siteConfig.phone.replace(/\./g, '')}`} style={{ fontSize: '1.25rem' }}>
-                    {siteConfig.phone}
-                  </a>
+                <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
+                  <h3 style={{ marginBottom: 'var(--space-6)' }}>Get In Touch</h3>
+                  
+                  <div style={{ marginBottom: 'var(--space-6)' }}>
+                    <h6>Phone</h6>
+                    <a 
+                      href={`tel:${siteConfig.phone.replace(/\./g, '')}`} 
+                      style={{ fontSize: '1.125rem', fontWeight: '500' }}
+                    >
+                      {siteConfig.phone}
+                    </a>
+                  </div>
+                  
+                  <div style={{ marginBottom: 'var(--space-6)' }}>
+                    <h6>Email</h6>
+                    <a 
+                      href={`mailto:${siteConfig.email}`} 
+                      style={{ fontSize: '1.125rem', fontWeight: '500' }}
+                    >
+                      {siteConfig.email}
+                    </a>
+                  </div>
+                  
+                  <div>
+                    <h6>Location</h6>
+                    <p className="mb-0" style={{ fontSize: '1.125rem' }}>
+                      {siteConfig.address.city}, {siteConfig.address.state}
+                    </p>
+                  </div>
                 </div>
-                
-                <div style={{ marginBottom: '2rem' }}>
-                  <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Email</h3>
-                  <a href={`mailto:${siteConfig.email}`} style={{ fontSize: '1.25rem' }}>
-                    {siteConfig.email}
-                  </a>
-                </div>
-                
-                <div style={{ marginBottom: '2rem' }}>
-                  <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Location</h3>
-                  <p className="mb-0">
-                    {siteConfig.address.city}, {siteConfig.address.state}
-                  </p>
-                </div>
-                
-                <div>
-                  <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Connect With Us</h3>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
+
+                <div className="card">
+                  <h3 style={{ marginBottom: 'var(--space-6)' }}>Follow Us</h3>
+                  <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
+                    <a 
+                      href={siteConfig.social.linkedin} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="social-icon"
+                      aria-label="LinkedIn"
+                    >
+                      in
+                    </a>
                     <a 
                       href={siteConfig.social.twitter} 
                       target="_blank" 
                       rel="noopener noreferrer"
+                      className="social-icon"
                       aria-label="Twitter"
                     >
-                      Twitter
+                      X
                     </a>
                     <a 
                       href={siteConfig.social.facebook} 
                       target="_blank" 
                       rel="noopener noreferrer"
+                      className="social-icon"
                       aria-label="Facebook"
                     >
-                      Facebook
-                    </a>
-                    <a 
-                      href={siteConfig.social.linkedin} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn"
-                    >
-                      LinkedIn
+                      f
                     </a>
                   </div>
                 </div>
@@ -192,4 +201,3 @@ export default function ContactPage() {
     </>
   );
 }
-

@@ -9,14 +9,12 @@ interface ServicePageProps {
   params: Promise<{ service: string }>;
 }
 
-// Generate static params for all services
 export async function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({
     service: slug,
   }));
 }
 
-// Generate metadata for each service page
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { service: slug } = await params;
   const service = getServiceBySlug(slug);
@@ -54,7 +52,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
     serviceType: service.shortTitle,
   });
 
-  // Get related services (excluding current)
   const relatedServices = services
     .filter(s => s.slug !== service.slug)
     .slice(0, 3);
@@ -64,7 +61,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <JsonLd data={[serviceSchema, generateBreadcrumbSchema(breadcrumbs)]} />
       
       <main>
-        {/* Breadcrumbs */}
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <div className="container">
             <ol>
@@ -75,45 +71,48 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </nav>
 
-        {/* Hero */}
         <section className="hero">
           <div className="container">
             <div className="hero-content">
+              <p className="section-label">Service</p>
               <h1>{service.title}</h1>
               <p>{service.description}</p>
             </div>
           </div>
         </section>
 
-        {/* Main Content */}
         <section className="section">
           <div className="container">
-            <div className="grid grid-2" style={{ gap: '3rem', alignItems: 'start' }}>
-              {/* Content */}
+            <div className="grid grid-2" style={{ gap: 'var(--space-16)', alignItems: 'start' }}>
               <div className="article-content" style={{ maxWidth: 'none' }}>
                 {service.content.split('\n\n').map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
 
-              {/* Sidebar */}
-              <aside>
-                {/* Features */}
-                <div className="card" style={{ marginBottom: '1.5rem' }}>
-                  <h2 style={{ fontSize: '1.25rem' }}>What's Included</h2>
-                  <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+              <aside style={{ position: 'sticky', top: 'calc(76px + var(--space-8))' }}>
+                <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
+                  <h4 style={{ marginBottom: 'var(--space-6)', color: 'var(--color-text-primary)' }}>
+                    What&apos;s Included
+                  </h4>
+                  <ul style={{ margin: 0, paddingLeft: 'var(--space-5)' }}>
                     {service.features.map((feature) => (
-                      <li key={feature} style={{ marginBottom: '0.5rem' }}>{feature}</li>
+                      <li key={feature} style={{ marginBottom: 'var(--space-3)', fontSize: '0.9375rem' }}>
+                        {feature}
+                      </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Benefits */}
                 <div className="card">
-                  <h2 style={{ fontSize: '1.25rem' }}>Benefits</h2>
-                  <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+                  <h4 style={{ marginBottom: 'var(--space-6)', color: 'var(--color-text-primary)' }}>
+                    Benefits
+                  </h4>
+                  <ul style={{ margin: 0, paddingLeft: 'var(--space-5)' }}>
                     {service.benefits.map((benefit) => (
-                      <li key={benefit} style={{ marginBottom: '0.5rem' }}>{benefit}</li>
+                      <li key={benefit} style={{ marginBottom: 'var(--space-3)', fontSize: '0.9375rem' }}>
+                        {benefit}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -122,10 +121,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        {/* Related Services */}
         <section className="section section-alt">
           <div className="container">
             <div className="section-header">
+              <p className="section-label">Explore</p>
               <h2>Related Services</h2>
               <p>Explore more ways we can help grow your practice.</p>
             </div>
@@ -136,37 +135,30 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   key={related.slug} 
                   href={`/services/${related.slug}`}
                   className="card"
-                  style={{ textDecoration: 'none' }}
                 >
                   <h3 style={{ fontSize: '1.125rem' }}>{related.shortTitle}</h3>
-                  <p style={{ fontSize: '0.875rem' }}>{related.description}</p>
+                  <p style={{ fontSize: '0.9375rem', marginBottom: 'var(--space-4)' }}>{related.description}</p>
+                  <span className="link-arrow">Learn more</span>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="section" style={{ background: 'var(--color-primary)', color: 'white' }}>
+        <section className="cta-section">
           <div className="container">
-            <div className="section-header" style={{ marginBottom: 0 }}>
-              <h2 style={{ color: 'white' }}>Ready to Get Started with {service.shortTitle}?</h2>
-              <p style={{ color: 'rgba(255,255,255,0.8)' }}>
-                Schedule a consultation to discuss how {service.shortTitle.toLowerCase()} can 
-                help grow your aesthetic practice.
-              </p>
-              <Link 
-                href="/contact" 
-                className="cta-button" 
-                style={{ marginTop: '1.5rem', display: 'inline-flex', background: 'white', color: 'var(--color-primary)' }}
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+            <p className="section-label">Get Started</p>
+            <h2>Ready to Start with {service.shortTitle}?</h2>
+            <p>
+              Schedule a consultation to discuss how {service.shortTitle.toLowerCase()} can 
+              help grow your aesthetic practice.
+            </p>
+            <Link href="/contact" className="cta-button button-large">
+              Schedule Consultation
+            </Link>
           </div>
         </section>
       </main>
     </>
   );
 }
-

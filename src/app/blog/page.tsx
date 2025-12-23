@@ -29,7 +29,6 @@ export default function BlogPage() {
     { name: 'Blog', url: `${siteConfig.url}/blog` },
   ];
 
-  // Sort posts by date (newest first)
   const sortedPosts = [...blogPosts].sort(
     (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
   );
@@ -39,7 +38,6 @@ export default function BlogPage() {
       <JsonLd data={generateBreadcrumbSchema(breadcrumbs)} />
       
       <main>
-        {/* Breadcrumbs */}
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <div className="container">
             <ol>
@@ -49,35 +47,33 @@ export default function BlogPage() {
           </div>
         </nav>
 
-        {/* Hero */}
         <section className="hero">
           <div className="container">
             <div className="hero-content">
-              <h1>Blog</h1>
+              <p className="section-label">Insights</p>
+              <h1>Marketing Insights for Aesthetic Practices</h1>
               <p>
-                Marketing insights, strategies, and tips for plastic surgeons, 
-                medical spas, and aesthetic practices.
+                Strategies, tips, and industry knowledge to help you grow your practice.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Blog Posts */}
         <section className="section">
           <div className="container">
-            <div className="grid grid-2" style={{ gap: '2rem' }}>
+            <div className="grid grid-2" style={{ gap: 'var(--space-8)' }}>
               {sortedPosts.map((post) => (
                 <article key={post.slug} className="card blog-card">
                   <div className="blog-meta">
                     <time dateTime={post.publishDate}>{formatDate(post.publishDate)}</time>
-                    <span style={{ margin: '0 0.5rem' }}>•</span>
+                    <span style={{ margin: '0 var(--space-2)' }}>·</span>
                     <span>{post.category}</span>
                   </div>
                   
-                  <h2 style={{ fontSize: '1.5rem', marginBottom: '0.75rem' }}>
+                  <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-4)' }}>
                     <Link 
                       href={`/blog/${post.slug}`}
-                      style={{ color: 'inherit', textDecoration: 'none' }}
+                      style={{ color: 'inherit' }}
                     >
                       {post.title}
                     </Link>
@@ -85,11 +81,8 @@ export default function BlogPage() {
                   
                   <p className="blog-excerpt">{post.description}</p>
                   
-                  <Link 
-                    href={`/blog/${post.slug}`}
-                    style={{ color: 'var(--color-accent)', fontWeight: 500 }}
-                  >
-                    Read More →
+                  <Link href={`/blog/${post.slug}`} className="link-arrow">
+                    Read article
                   </Link>
                 </article>
               ))}
@@ -97,23 +90,20 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Newsletter CTA */}
-        <section className="section section-alt">
+        <section className="cta-section">
           <div className="container">
-            <div className="section-header">
-              <h2>Stay Updated</h2>
-              <p>
-                Get the latest marketing insights for aesthetic practices 
-                delivered to your inbox.
-              </p>
-              <Link href="/contact" className="button" style={{ marginTop: '1rem' }}>
-                Subscribe to Our Newsletter
-              </Link>
-            </div>
+            <p className="section-label">Stay Updated</p>
+            <h2>Get Marketing Insights</h2>
+            <p>
+              Get the latest marketing insights for aesthetic practices 
+              delivered to your inbox.
+            </p>
+            <Link href="/contact" className="cta-button button-large">
+              Subscribe to Updates
+            </Link>
           </div>
         </section>
       </main>
     </>
   );
 }
-

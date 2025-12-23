@@ -3,20 +3,18 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { generateArticleMetadata, JsonLd, generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { siteConfig } from '@/config/site';
-import { blogPosts, getBlogPostBySlug, getAllBlogSlugs, getRecentBlogPosts } from '@/content/blog';
+import { getBlogPostBySlug, getAllBlogSlugs, getRecentBlogPosts } from '@/content/blog';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Generate static params for all blog posts
 export async function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({
     slug,
   }));
 }
 
-// Generate metadata for each blog post
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
@@ -67,12 +65,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     author: post.author,
   });
 
-  // Get related posts (excluding current)
   const relatedPosts = getRecentBlogPosts(4)
     .filter(p => p.slug !== post.slug)
     .slice(0, 3);
 
-  // Parse content with markdown-like formatting
   const renderContent = (content: string) => {
     const lines = content.split('\n');
     const elements: JSX.Element[] = [];
@@ -107,7 +103,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         flushList();
       } else if (trimmedLine) {
         flushList();
-        // Handle bold text
         const formattedLine = trimmedLine.replace(
           /\*\*(.*?)\*\*/g,
           '<strong>$1</strong>'
@@ -127,7 +122,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <JsonLd data={[articleSchema, generateBreadcrumbSchema(breadcrumbs)]} />
       
       <main>
-        {/* Breadcrumbs */}
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <div className="container">
             <ol>
@@ -138,42 +132,40 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </nav>
 
-        {/* Article Header */}
         <header className="hero">
           <div className="container">
-            <div className="hero-content">
-              <div className="blog-meta" style={{ marginBottom: '1rem' }}>
+            <div className="hero-content" style={{ maxWidth: 'var(--container-narrow)' }}>
+              <div className="blog-meta" style={{ marginBottom: 'var(--space-6)' }}>
                 <time dateTime={post.publishDate}>{formatDate(post.publishDate)}</time>
-                <span style={{ margin: '0 0.5rem' }}>•</span>
+                <span style={{ margin: '0 var(--space-2)' }}>·</span>
                 <span>{post.category}</span>
               </div>
               
-              <h1>{post.title}</h1>
+              <h1 style={{ marginBottom: 'var(--space-6)' }}>{post.title}</h1>
               
-              <p style={{ marginBottom: 0 }}>By {post.author}</p>
+              <p className="text-tertiary mb-0">By {post.author}</p>
             </div>
           </div>
         </header>
 
-        {/* Article Content */}
         <article className="section">
           <div className="container">
             <div className="article-content">
               {renderContent(post.content)}
             </div>
 
-            {/* Tags */}
             {post.tags.length > 0 && (
-              <div className="article-content" style={{ marginTop: '3rem' }}>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div className="article-content" style={{ marginTop: 'var(--space-12)' }}>
+                <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
                   {post.tags.map((tag) => (
                     <span 
                       key={tag}
                       style={{
-                        padding: '0.25rem 0.75rem',
-                        background: 'var(--color-background-alt)',
-                        borderRadius: '4px',
-                        fontSize: '0.875rem',
+                        padding: 'var(--space-2) var(--space-4)',
+                        background: 'var(--color-surface-elevated)',
+                        border: '1px solid var(--color-border)',
+                        fontSize: '0.8125rem',
+                        color: 'var(--color-text-tertiary)',
                       }}
                     >
                       {tag}
@@ -185,12 +177,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </article>
 
-        {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <section className="section section-alt">
             <div className="container">
               <div className="section-header">
-                <h2>Related Articles</h2>
+                <p className="section-label">Related</p>
+                <h2>More Insights</h2>
               </div>
               
               <div className="grid grid-3">
@@ -200,16 +192,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       <time dateTime={related.publishDate}>{formatDate(related.publishDate)}</time>
                     </div>
                     
-                    <h3 style={{ fontSize: '1.125rem' }}>
+                    <h3 style={{ fontSize: '1.125rem', marginBottom: 'var(--space-3)' }}>
                       <Link 
                         href={`/blog/${related.slug}`}
-                        style={{ color: 'inherit', textDecoration: 'none' }}
+                        style={{ color: 'inherit' }}
                       >
                         {related.title}
                       </Link>
                     </h3>
                     
-                    <p style={{ fontSize: '0.875rem' }} className="mb-0">{related.description}</p>
+                    <p style={{ fontSize: '0.9375rem' }} className="mb-0">{related.description}</p>
                   </article>
                 ))}
               </div>
@@ -217,26 +209,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </section>
         )}
 
-        {/* CTA */}
-        <section className="section" style={{ background: 'var(--color-primary)', color: 'white' }}>
+        <section className="cta-section">
           <div className="container">
-            <div className="section-header" style={{ marginBottom: 0 }}>
-              <h2 style={{ color: 'white' }}>Ready to Grow Your Practice?</h2>
-              <p style={{ color: 'rgba(255,255,255,0.8)' }}>
-                Schedule a consultation to discuss how Plastix Marketing can help.
-              </p>
-              <Link 
-                href="/contact" 
-                className="cta-button" 
-                style={{ marginTop: '1.5rem', display: 'inline-flex', background: 'white', color: 'var(--color-primary)' }}
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+            <p className="section-label">Get Started</p>
+            <h2>Ready to Grow Your Practice?</h2>
+            <p>
+              Schedule a consultation to discuss how Plastix Marketing can help.
+            </p>
+            <Link href="/contact" className="cta-button button-large">
+              Schedule Consultation
+            </Link>
           </div>
         </section>
       </main>
     </>
   );
 }
-

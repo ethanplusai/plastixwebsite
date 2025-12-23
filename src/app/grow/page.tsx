@@ -25,7 +25,7 @@ const growthPlanSteps = [
   {
     number: '03',
     title: 'Content & Authority',
-    description: 'We create comprehensive content that positions you as an authority and drives organic traffic for years to come.',
+    description: 'We create comprehensive content that positions you as an authority and drives organic traffic for years.',
   },
   {
     number: '04',
@@ -36,6 +36,21 @@ const growthPlanSteps = [
     number: '05',
     title: 'Optimization & Scaling',
     description: 'We continuously optimize based on data, improve conversion rates, and scale what works to accelerate growth.',
+  },
+];
+
+const reasons = [
+  {
+    title: 'Industry Expertise',
+    description: 'We understand plastic surgery and med spa marketing inside and out. We know what patients search for, their concerns, and how to convert them.',
+  },
+  {
+    title: 'Proven Results',
+    description: 'Our clients generate 805+ leads per month, see 400% traffic increases, and achieve dominant search rankings.',
+  },
+  {
+    title: 'Full-Service Partnership',
+    description: 'From web design to marketing automation, we handle everything. One partner, one strategy, one team focused on your growth.',
   },
 ];
 
@@ -50,7 +65,6 @@ export default function GrowPage() {
       <JsonLd data={generateBreadcrumbSchema(breadcrumbs)} />
       
       <main>
-        {/* Breadcrumbs */}
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <div className="container">
             <ol>
@@ -60,67 +74,48 @@ export default function GrowPage() {
           </div>
         </nav>
 
-        {/* Hero */}
         <section className="hero">
           <div className="container">
             <div className="hero-content">
-              <h1>Grow With Plastix</h1>
-              <p>
-                The Plastix Growth Plan is our proven framework for sustainable 
-                practice growth. Learn how we can help your aesthetic practice 
-                reach its full potential.
+              <p className="section-label">Growth Framework</p>
+              <h1>The Plastix Growth Plan</h1>
+              <p style={{ maxWidth: '640px' }}>
+                Our proven framework for sustainable practice growth. Learn how we 
+                help aesthetic practices reach their full potential.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Why Grow With Us */}
         <section className="section">
           <div className="container">
             <div className="section-header">
-              <h2>Why Practices Choose Plastix</h2>
+              <p className="section-label">Why Plastix</p>
+              <h2>Why Practices Choose Us</h2>
               <p>
-                We're not a generic marketing agency. We exclusively serve aesthetic 
+                We are not a generic marketing agency. We exclusively serve aesthetic 
                 practices, bringing deep industry expertise to every engagement.
               </p>
             </div>
             
             <div className="grid grid-3">
-              <div className="card">
-                <h3>Industry Expertise</h3>
-                <p>
-                  We understand plastic surgery and med spa marketing inside and out. 
-                  We know what patients are searching for, what concerns they have, 
-                  and how to convert them.
-                </p>
-              </div>
-              
-              <div className="card">
-                <h3>Proven Results</h3>
-                <p>
-                  Our clients generate 805+ leads per month, see 400% traffic increases, 
-                  and achieve dominant search rankings. We have the track record to prove it.
-                </p>
-              </div>
-              
-              <div className="card">
-                <h3>Full-Service Partnership</h3>
-                <p>
-                  From web design to marketing automation, we handle everything. 
-                  One partner, one strategy, one team focused on your growth.
-                </p>
-              </div>
+              {reasons.map((reason) => (
+                <div key={reason.title} className="card">
+                  <h3>{reason.title}</h3>
+                  <p className="mb-0">{reason.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Growth Plan Steps */}
         <section className="section section-alt">
           <div className="container">
             <div className="section-header">
-              <h2>The Plastix Growth Plan</h2>
+              <p className="section-label">Process</p>
+              <h2>Our Five-Step Framework</h2>
               <p>
-                Our proven 5-step process for sustainable aesthetic practice growth.
+                A proven process for sustainable aesthetic practice growth.
               </p>
             </div>
             
@@ -130,24 +125,27 @@ export default function GrowPage() {
                   key={step.number} 
                   className="card" 
                   style={{ 
-                    marginBottom: index < growthPlanSteps.length - 1 ? '1.5rem' : 0,
+                    marginBottom: index < growthPlanSteps.length - 1 ? 'var(--space-4)' : 0,
                     display: 'flex',
-                    gap: '1.5rem',
+                    gap: 'var(--space-8)',
                     alignItems: 'flex-start'
                   }}
                 >
                   <span 
                     style={{ 
-                      fontSize: '2rem', 
-                      fontWeight: 700, 
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '2.5rem', 
+                      fontWeight: 400, 
                       color: 'var(--color-accent)',
-                      lineHeight: 1
+                      lineHeight: 1,
+                      letterSpacing: '-0.03em',
+                      flexShrink: 0,
                     }}
                   >
                     {step.number}
                   </span>
                   <div>
-                    <h3 style={{ marginTop: 0 }}>{step.title}</h3>
+                    <h3 style={{ marginTop: 0, marginBottom: 'var(--space-3)' }}>{step.title}</h3>
                     <p className="mb-0">{step.description}</p>
                   </div>
                 </div>
@@ -156,14 +154,14 @@ export default function GrowPage() {
           </div>
         </section>
 
-        {/* Services Overview */}
         <section className="section">
           <div className="container">
             <div className="section-header">
-              <h2>Our Comprehensive Services</h2>
+              <p className="section-label">Capabilities</p>
+              <h2>Comprehensive Services</h2>
               <p>
                 The Plastix Growth Plan leverages our full suite of marketing services, 
-                customized to your practice's unique needs.
+                customized to your practice&apos;s unique needs.
               </p>
             </div>
             
@@ -173,9 +171,8 @@ export default function GrowPage() {
                   key={service.slug} 
                   href={`/services/${service.slug}`}
                   className="card"
-                  style={{ textDecoration: 'none' }}
                 >
-                  <h3 style={{ fontSize: '1rem' }}>{service.shortTitle}</h3>
+                  <h4 style={{ marginBottom: 'var(--space-2)' }}>{service.shortTitle}</h4>
                   <p style={{ fontSize: '0.875rem' }} className="mb-0">{service.description}</p>
                 </Link>
               ))}
@@ -183,27 +180,20 @@ export default function GrowPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="section" style={{ background: 'var(--color-primary)', color: 'white' }}>
+        <section className="cta-section">
           <div className="container">
-            <div className="section-header" style={{ marginBottom: 0 }}>
-              <h2 style={{ color: 'white' }}>Ready to Start Growing?</h2>
-              <p style={{ color: 'rgba(255,255,255,0.8)' }}>
-                Schedule a consultation to discuss your practice goals and learn how 
-                the Plastix Growth Plan can help you achieve them.
-              </p>
-              <Link 
-                href="/contact" 
-                className="cta-button" 
-                style={{ marginTop: '1.5rem', display: 'inline-flex', background: 'white', color: 'var(--color-primary)' }}
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+            <p className="section-label">Get Started</p>
+            <h2>Ready to Start Growing?</h2>
+            <p>
+              Schedule a consultation to discuss your practice goals and learn how 
+              the Plastix Growth Plan can help you achieve them.
+            </p>
+            <Link href="/contact" className="cta-button button-large">
+              Schedule Consultation
+            </Link>
           </div>
         </section>
       </main>
     </>
   );
 }
-

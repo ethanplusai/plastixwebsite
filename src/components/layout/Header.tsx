@@ -26,11 +26,10 @@ export function Header() {
             {siteConfig.phone}
           </a>
           <Link href="/contact" className="cta-button">
-            Schedule Consultation
+            Get Started
           </Link>
         </div>
       </div>
     </header>
   );
 }
-

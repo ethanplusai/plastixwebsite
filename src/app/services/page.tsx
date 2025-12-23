@@ -16,6 +16,21 @@ export const metadata: Metadata = generatePageMetadata({
   ],
 });
 
+const reasons = [
+  {
+    title: 'Industry Expertise',
+    description: 'Deep understanding of plastic surgery and med spa marketing, patient concerns, and competitive landscapes.',
+  },
+  {
+    title: 'Proven Results',
+    description: '805+ leads per month, 400% traffic increases, and dominant search rankings for our clients.',
+  },
+  {
+    title: 'Full-Service Capabilities',
+    description: 'One partner for all your marketing needs, with integrated strategies that work together.',
+  },
+];
+
 export default function ServicesPage() {
   const breadcrumbs = [
     { name: 'Home', url: siteConfig.url },
@@ -27,7 +42,6 @@ export default function ServicesPage() {
       <JsonLd data={generateBreadcrumbSchema(breadcrumbs)} />
       
       <main>
-        {/* Breadcrumbs */}
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <div className="container">
             <ol>
@@ -37,20 +51,19 @@ export default function ServicesPage() {
           </div>
         </nav>
 
-        {/* Hero */}
         <section className="hero">
           <div className="container">
             <div className="hero-content">
-              <h1>Our Services</h1>
+              <p className="section-label">Solutions</p>
+              <h1>Full-Service Marketing Solutions</h1>
               <p>
-                Comprehensive marketing solutions designed specifically for 
+                Comprehensive marketing services designed specifically for 
                 plastic surgeons, medical spas, and aesthetic practices.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Services Grid */}
         <section className="section">
           <div className="container">
             <div className="grid grid-3">
@@ -59,78 +72,51 @@ export default function ServicesPage() {
                   key={service.slug} 
                   href={`/services/${service.slug}`}
                   className="card"
-                  style={{ textDecoration: 'none' }}
                 >
-                  <h2 style={{ fontSize: '1.25rem' }}>{service.shortTitle}</h2>
-                  <p>{service.description}</p>
-                  <span style={{ color: 'var(--color-accent)', fontWeight: 500 }}>
-                    Learn More →
-                  </span>
+                  <h3 style={{ fontSize: '1.25rem' }}>{service.shortTitle}</h3>
+                  <p style={{ marginBottom: 'var(--space-6)' }}>{service.description}</p>
+                  <span className="link-arrow">Learn more</span>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Why Choose Us */}
         <section className="section section-alt">
           <div className="container">
             <div className="section-header">
-              <h2>Why Choose Plastix Marketing</h2>
+              <p className="section-label">Why Plastix</p>
+              <h2>Not Just Another Agency</h2>
               <p>
-                We're not a generalist agency. We focus exclusively on marketing for 
-                aesthetic practices, bringing unmatched industry expertise to every service.
+                We focus exclusively on marketing for aesthetic practices, 
+                bringing unmatched industry expertise to every service.
               </p>
             </div>
             
             <div className="grid grid-3">
-              <div className="card">
-                <h3>Industry Expertise</h3>
-                <p>
-                  Deep understanding of plastic surgery and med spa marketing, 
-                  patient concerns, and competitive landscapes.
-                </p>
-              </div>
-              
-              <div className="card">
-                <h3>Proven Results</h3>
-                <p>
-                  805+ leads per month, 400% traffic increases, and dominant 
-                  search rankings for our clients.
-                </p>
-              </div>
-              
-              <div className="card">
-                <h3>Full-Service Capabilities</h3>
-                <p>
-                  One partner for all your marketing needs, with integrated 
-                  strategies that work together.
-                </p>
-              </div>
+              {reasons.map((reason) => (
+                <div key={reason.title} className="card">
+                  <h3>{reason.title}</h3>
+                  <p className="mb-0">{reason.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="section" style={{ background: 'var(--color-primary)', color: 'white' }}>
+        <section className="cta-section">
           <div className="container">
-            <div className="section-header" style={{ marginBottom: 0 }}>
-              <h2 style={{ color: 'white' }}>Ready to Get Started?</h2>
-              <p style={{ color: 'rgba(255,255,255,0.8)' }}>
-                Schedule a consultation to discuss which services are right for your practice.
-              </p>
-              <Link 
-                href="/contact" 
-                className="cta-button" 
-                style={{ marginTop: '1.5rem', display: 'inline-flex', background: 'white', color: 'var(--color-primary)' }}
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+            <p className="section-label">Get Started</p>
+            <h2>Ready to Begin?</h2>
+            <p>
+              Schedule a consultation to discuss which services are right for your practice.
+            </p>
+            <Link href="/contact" className="cta-button button-large">
+              Schedule Consultation
+            </Link>
           </div>
         </section>
       </main>
     </>
   );
 }
-

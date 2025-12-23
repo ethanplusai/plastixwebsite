@@ -19,9 +19,9 @@ export const metadata: Metadata = generatePageMetadata({
 
 const stats = [
   { value: '805%', label: 'Inbound Marketing ROI' },
-  { value: '805+', label: 'New Leads Every Month' },
-  { value: '400%', label: 'Increase in Website Traffic' },
-  { value: '500K+', label: 'Monthly Search Impressions' },
+  { value: '805+', label: 'New Leads Monthly' },
+  { value: '400%', label: 'Traffic Increase' },
+  { value: '500K+', label: 'Monthly Impressions' },
 ];
 
 const testimonials = [
@@ -48,59 +48,61 @@ export default function HomePage() {
       <JsonLd data={[generateOrganizationSchema(), generateWebSiteSchema()]} />
       
       <main>
-        {/* Hero Section */}
-        <section className="hero">
+        <section className="hero-home">
           <div className="container">
             <div className="hero-content">
-              <h1>Grow With Plastix</h1>
-              <p>
-                Our proven marketing strategy delivers effective lead generation 
-                and tangible results for plastic surgery practices and med spas.
+              <p className="section-label">Marketing for Aesthetic Practices</p>
+              <h1>Strategic Growth<br />for Elite Practices</h1>
+              <p style={{ maxWidth: '580px', marginBottom: 'var(--space-10)' }}>
+                We partner with plastic surgeons, medical spas, and aesthetic practices 
+                to deliver measurable growth through precision marketing.
               </p>
-              <Link href="/contact" className="cta-button" style={{ marginTop: '1.5rem', display: 'inline-flex' }}>
-                Show Me How
-              </Link>
+              <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+                <Link href="/contact" className="cta-button button-large">
+                  Schedule Consultation
+                </Link>
+                <Link href="/portfolio" className="button button-outline button-large">
+                  View Our Work
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="section">
+        <section className="section section-alt">
           <div className="container">
             <div className="section-header">
-              <h2>It's All About The Results</h2>
+              <p className="section-label">Results</p>
+              <h2>Performance That Speaks</h2>
               <p>
-                Our clients are much like your patients—it's all about the results. 
-                Aesthetic practices across the country choose Plastix because we deliver 
-                a long-term marketing strategy that continues to deliver new patients for years.
+                Our clients choose Plastix because we deliver long-term strategies 
+                that generate new patients consistently, year after year.
               </p>
             </div>
             
             <div className="stats">
               {stats.map((stat) => (
-                <div key={stat.label}>
+                <div key={stat.label} style={{ textAlign: 'center' }}>
                   <div className="stat-value">{stat.value}</div>
                   <div className="stat-label">{stat.label}</div>
                 </div>
               ))}
             </div>
-            
-            <div className="text-center" style={{ marginTop: '2rem' }}>
-              <Link href="/portfolio" className="button-outline button">
-                View Our Portfolio
-              </Link>
-            </div>
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="section section-alt">
+        <section className="section">
           <div className="container">
+            <div className="section-header">
+              <p className="section-label">Client Success</p>
+              <h2>Trusted by Leading Practices</h2>
+            </div>
+            
             <div className="grid grid-3">
               {testimonials.map((testimonial) => (
                 <article key={testimonial.author} className="testimonial">
                   <blockquote className="testimonial-quote">
-                    "{testimonial.quote}"
+                    &ldquo;{testimonial.quote}&rdquo;
                   </blockquote>
                   <footer>
                     <cite className="testimonial-author">{testimonial.author}</cite>
@@ -112,14 +114,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Specialties Section */}
-        <section className="section">
+        <section className="section section-alt">
           <div className="container">
             <div className="section-header">
-              <h2>Our Specialties</h2>
+              <p className="section-label">Industries</p>
+              <h2>Our Specialization</h2>
               <p>
-                We are not just another marketing agency. We focus on marketing for plastic surgeons, 
-                medical spas, coolsculpting studios, and other aesthetic practices.
+                We exclusively serve aesthetic and medical practices, 
+                bringing deep industry expertise to every engagement.
               </p>
             </div>
             
@@ -129,23 +131,24 @@ export default function HomePage() {
                   key={industry.slug} 
                   href={`/industries/${industry.slug}`}
                   className="card"
-                  style={{ textDecoration: 'none' }}
                 >
-                  <h3>{industry.shortTitle} Marketing</h3>
+                  <h3>{industry.shortTitle}</h3>
                   <p>{industry.description}</p>
+                  <span className="link-arrow">Learn more</span>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Services Preview Section */}
-        <section className="section section-alt">
+        <section className="section">
           <div className="container">
             <div className="section-header">
-              <h2>Our Solutions</h2>
+              <p className="section-label">Solutions</p>
+              <h2>Full-Service Capabilities</h2>
               <p>
-                Comprehensive marketing services designed specifically for aesthetic practices.
+                Comprehensive marketing services designed for the unique 
+                demands of aesthetic practices.
               </p>
             </div>
             
@@ -155,43 +158,35 @@ export default function HomePage() {
                   key={service.slug} 
                   href={`/services/${service.slug}`}
                   className="card"
-                  style={{ textDecoration: 'none' }}
                 >
-                  <h3 style={{ fontSize: '1.125rem' }}>{service.shortTitle}</h3>
-                  <p style={{ fontSize: '0.875rem' }}>{service.description}</p>
+                  <h4 style={{ marginBottom: 'var(--space-3)' }}>{service.shortTitle}</h4>
+                  <p style={{ fontSize: '0.9375rem' }}>{service.description}</p>
                 </Link>
               ))}
             </div>
             
-            <div className="text-center" style={{ marginTop: '2rem' }}>
-              <Link href="/services" className="button">
+            <div className="text-center" style={{ marginTop: 'var(--space-12)' }}>
+              <Link href="/services" className="button button-outline">
                 View All Services
               </Link>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="section" style={{ background: 'var(--color-primary)', color: 'white' }}>
+        <section className="cta-section">
           <div className="container">
-            <div className="section-header" style={{ marginBottom: 0 }}>
-              <h2 style={{ color: 'white' }}>Ready to Grow Your Practice?</h2>
-              <p style={{ color: 'rgba(255,255,255,0.8)' }}>
-                Learn more about Plastix Marketing and why so many plastic surgery 
-                & medical spa practices trust us to grow their business.
-              </p>
-              <Link 
-                href="/contact" 
-                className="cta-button" 
-                style={{ marginTop: '1.5rem', display: 'inline-flex', background: 'white', color: 'var(--color-primary)' }}
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+            <p className="section-label">Get Started</p>
+            <h2>Ready to Elevate Your Practice?</h2>
+            <p>
+              Schedule a consultation to discuss your goals and learn how 
+              we can help your practice reach its full potential.
+            </p>
+            <Link href="/contact" className="cta-button button-large">
+              Schedule Consultation
+            </Link>
           </div>
         </section>
       </main>
     </>
   );
 }
-

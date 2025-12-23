@@ -20,7 +20,8 @@ const clients = [
 ];
 
 const caseStudy = {
-  title: 'Buckhead Plastic Surgery Case Study',
+  title: 'Buckhead Plastic Surgery',
+  subtitle: 'Featured Case Study',
   description: 'Learn how we helped Buckhead Plastic Surgery dominate keyword rankings, convert more leads, and schedule more surgeries.',
   stats: [
     { value: '805%', label: 'Inbound Marketing ROI' },
@@ -29,6 +30,25 @@ const caseStudy = {
     { value: '500K+', label: 'Monthly Impressions' },
   ],
 };
+
+const results = [
+  {
+    title: 'Lead Generation',
+    description: 'Our clients generate an average of 805+ new leads per month through comprehensive inbound marketing strategies. These are qualified prospects actively seeking aesthetic services.',
+  },
+  {
+    title: 'SEO Dominance',
+    description: 'We help practices achieve top rankings for competitive procedure keywords. Clients see 400%+ increases in organic traffic and dominate local search results.',
+  },
+  {
+    title: 'Conversion Optimization',
+    description: 'Beyond driving traffic, we optimize the entire patient journey. Our clients convert more website visitors into consultations and more consultations into procedures.',
+  },
+  {
+    title: 'Marketing Automation',
+    description: 'We implement marketing automation that nurtures leads, retains patients, and scales growth without requiring additional staff.',
+  },
+];
 
 export default function PortfolioPage() {
   const breadcrumbs = [
@@ -41,7 +61,6 @@ export default function PortfolioPage() {
       <JsonLd data={generateBreadcrumbSchema(breadcrumbs)} />
       
       <main>
-        {/* Breadcrumbs */}
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <div className="container">
             <ol>
@@ -51,11 +70,11 @@ export default function PortfolioPage() {
           </div>
         </nav>
 
-        {/* Hero */}
         <section className="hero">
           <div className="container">
             <div className="hero-content">
-              <h1>Our Portfolio</h1>
+              <p className="section-label">Our Work</p>
+              <h1>Results That Speak for Themselves</h1>
               <p>
                 We take great pride in the work and results we have provided 
                 for elite aesthetic practices across the country.
@@ -64,19 +83,16 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        {/* Featured Case Study */}
         <section className="section">
           <div className="container">
-            <div className="card" style={{ padding: '3rem' }}>
-              <div style={{ maxWidth: '700px' }}>
-                <span className="text-muted" style={{ fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Featured Case Study
-                </span>
-                <h2 style={{ marginTop: '0.5rem' }}>{caseStudy.title}</h2>
-                <p>{caseStudy.description}</p>
-              </div>
+            <div className="card" style={{ padding: 'var(--space-12)' }}>
+              <p className="section-label">{caseStudy.subtitle}</p>
+              <h2 style={{ marginBottom: 'var(--space-4)' }}>{caseStudy.title}</h2>
+              <p style={{ maxWidth: '640px', marginBottom: 'var(--space-10)' }}>
+                {caseStudy.description}
+              </p>
               
-              <div className="stats" style={{ marginTop: '2rem' }}>
+              <div className="stats" style={{ padding: '0' }}>
                 {caseStudy.stats.map((stat) => (
                   <div key={stat.label}>
                     <div className="stat-value">{stat.value}</div>
@@ -85,21 +101,19 @@ export default function PortfolioPage() {
                 ))}
               </div>
               
-              <Link 
-                href="/contact" 
-                className="button" 
-                style={{ marginTop: '2rem', display: 'inline-flex' }}
-              >
-                Download Case Study
-              </Link>
+              <div style={{ marginTop: 'var(--space-10)' }}>
+                <Link href="/contact" className="cta-button">
+                  Download Full Case Study
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Clients Grid */}
         <section className="section section-alt">
           <div className="container">
             <div className="section-header">
+              <p className="section-label">Partners</p>
               <h2>Our Clients</h2>
               <p>
                 We partner with leading plastic surgeons, medical spas, and aesthetic 
@@ -109,83 +123,59 @@ export default function PortfolioPage() {
             
             <div className="grid grid-3">
               {clients.map((client) => (
-                <div key={client} className="card text-center">
-                  <h3 style={{ fontSize: '1.125rem', marginBottom: 0 }}>{client}</h3>
+                <div 
+                  key={client} 
+                  className="card text-center"
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    minHeight: '120px'
+                  }}
+                >
+                  <h4 style={{ margin: 0, fontSize: '1.125rem' }}>{client}</h4>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Results Section */}
         <section className="section">
           <div className="container">
             <div className="section-header">
+              <p className="section-label">Outcomes</p>
               <h2>The Results We Deliver</h2>
               <p>
                 Our clients see measurable improvements in leads, traffic, and revenue. 
-                Here's what the Plastix Growth Plan delivers.
+                Here is what the Plastix Growth Plan delivers.
               </p>
             </div>
             
             <div className="grid grid-2">
-              <div className="card">
-                <h3>Lead Generation</h3>
-                <p>
-                  Our clients generate an average of 805+ new leads per month through 
-                  comprehensive inbound marketing strategies. These are qualified prospects 
-                  actively seeking aesthetic services.
-                </p>
-              </div>
-              
-              <div className="card">
-                <h3>SEO Dominance</h3>
-                <p>
-                  We help practices achieve top rankings for competitive procedure keywords. 
-                  Clients see 400%+ increases in organic traffic and dominate local search results.
-                </p>
-              </div>
-              
-              <div className="card">
-                <h3>Conversion Optimization</h3>
-                <p>
-                  Beyond driving traffic, we optimize the entire patient journey. Our clients 
-                  convert more website visitors into consultations and more consultations into procedures.
-                </p>
-              </div>
-              
-              <div className="card">
-                <h3>Marketing Automation</h3>
-                <p>
-                  We implement marketing automation that nurtures leads, retains patients, and 
-                  scales growth without requiring additional staff. More efficiency, better results.
-                </p>
-              </div>
+              {results.map((result) => (
+                <div key={result.title} className="card">
+                  <h3>{result.title}</h3>
+                  <p className="mb-0">{result.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="section" style={{ background: 'var(--color-primary)', color: 'white' }}>
+        <section className="cta-section">
           <div className="container">
-            <div className="section-header" style={{ marginBottom: 0 }}>
-              <h2 style={{ color: 'white' }}>Ready to Join Our Portfolio?</h2>
-              <p style={{ color: 'rgba(255,255,255,0.8)' }}>
-                Schedule a consultation to learn how we can deliver similar 
-                results for your practice.
-              </p>
-              <Link 
-                href="/contact" 
-                className="cta-button" 
-                style={{ marginTop: '1.5rem', display: 'inline-flex', background: 'white', color: 'var(--color-primary)' }}
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+            <p className="section-label">Join Us</p>
+            <h2>Ready to Join Our Portfolio?</h2>
+            <p>
+              Schedule a consultation to learn how we can deliver similar 
+              results for your practice.
+            </p>
+            <Link href="/contact" className="cta-button button-large">
+              Schedule Consultation
+            </Link>
           </div>
         </section>
       </main>
     </>
   );
 }
-
